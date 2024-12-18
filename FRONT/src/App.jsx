@@ -12,7 +12,7 @@ import WISHLIST from './components/WishList'
 
 function App() {
   return(
-    <div className='min-h-screen flex flex-col'>
+    <div className='app_container min-h-screen flex flex-col'>
       <Router>
         <NAVBAR />
         <Routes>

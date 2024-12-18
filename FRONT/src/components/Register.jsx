@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState } from "react"
 
 
 function Register() {
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
  
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const response = await fetch("http://localhost:1337/api/auth/local/register", {
         method: "POST",
@@ -20,21 +20,21 @@ function Register() {
           email: email,
           password: password,
         }),
-      });
+      })
  
-      const data = await response.json();
+      const data = await response.json()
       if (response.ok) {
-        console.log("Inscription réussie :", data);
-        alert("Inscription réussie !");
+        console.log("Inscription réussie :", data)
+        alert("Inscription réussie !")
       } else {
-        console.error("Erreur :", data);
-        alert("Erreur : " + data.error.message);
+        console.error("Erreur :", data)
+        alert("Erreur : " + data.error.message)
       }
     } catch (error) {
-      console.error("Erreur réseau :", error);
-      alert("Erreur réseau : " + error.message);
+      console.error("Erreur réseau :", error)
+      alert("Erreur réseau : " + error.message)
     }
-  };
+  }
 
   return (
   
@@ -54,7 +54,7 @@ function Register() {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-red-400"
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-red-800"
             required
           />
         </div>
@@ -67,7 +67,7 @@ function Register() {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-red-400"
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-red-800"
             required
           />
         </div>
@@ -80,13 +80,13 @@ function Register() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-red-400"
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-red-800"
             required
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-red-400 text-white py-2 rounded  transition"
+          className="w-full bg-red-800 text-white py-2 rounded  transition"
           >
           Créer mon compte
         </button>
