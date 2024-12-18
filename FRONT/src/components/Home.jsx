@@ -1,120 +1,69 @@
-import React from "react"
-import CHAUSSURE1 from "../assets/Chaussure1.webp"
-import CHAUSSURE2 from "../assets/Chaussure2.webp"
-import CHAUSSURE3 from "../assets/Chaussure3.webp"
-import CHAUSSURE4 from "../assets/Chaussure4.webp"
-import CHAUSSURE5 from "../assets/Chaussure5.webp"
-import CHAUSSURE6 from "../assets/Chaussure6.webp"
-import CHAUSSURE7 from "../assets/Chaussure7.webp"
-import CHAUSSURE8 from "../assets/Chaussure8.webp"
-import CHAUSSURE9 from "../assets/Chaussure9.webp"
-
-
+import React, { useEffect, useState } from "react";
+import { Heart } from 'lucide-react';
 
 function Home() {
-    return (
-        <div className="home_container flex flex-col items-center p-3 font-mono">
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-            <div className=" text-4xl font-medium m-4">
-                <h1>Sneakers</h1>
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:1337/api/products");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+        }
+        const data = await response.json();
+        setProducts(data.data || []);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) return <p>Chargement en cours...</p>;
+  if (error) return <p>Erreur : {error}</p>;
+  if (!products.length) return <p>Aucun produit disponible pour le moment.</p>;
+  
+  return (
+    <div className="home_container flex flex-col items-center p-3 font-mono">
+
+      <h1 className="text-3xl text-white font-medium bg-red-400 rounded p-5 m-10">
+        Sneakers
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-4">
+
+        {products.map((product) => (
+          <div key={product.id} className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
+            <div>
+              <img
+                src={product.image_url}
+                alt={product.name}
+                className="size-52"
+              />
             </div>
+            <div className="flex justify-between items-start">
+              <div>   
+              <h2 className="text-base mx-5 mt-[15px]">{product.name}</h2>
+              <p className="mx-5 font-extralight ">Prix : {product.price} €</p>
+              <p className="mx-5 text-sm font-extralight text-gray-500">{product.description}</p>
+              </div>
+              <div className="mr-3 mt-4  size-7 flex justify-center items-center text-black">
+                <Heart className="hover:size-7 active:text-red-600"/>
+              </div>
+            </div>  
+          </div>
+        ))}
+      
+      </div>
 
-            <div className="flex flex-wrap gap-6 justify-center p-3 mb-6">
-               
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE1}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE2}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE3}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE4}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-                
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE5}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE6}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE7}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE8}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE9}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-                <div className=" border-solid border-2 border-zinc-800/15 w-52 h-80 rounded flex flex-col">
-                    <div className=" border-solid border-2 ">
-                        <img className="size-52"  src={CHAUSSURE1}></img>
-                    </div>
-                    <p className="mx-5 mt-[15px]">Abibas</p>
-                    <p className="mx-5">Campus 3000</p>
-                    <p className="mx-5">350€</p>
-                </div>
-
-            </div>
-
-        </div>
-    )
+    </div>
+  );
 }
 
 export default Home

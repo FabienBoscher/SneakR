@@ -3,42 +3,26 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
 
-.App{
-    background-color: white;
+html{
+    height: 100dvh;
+    width: 100dvw;
+}
+
+body{
     height: 100%;
     width: 100%;
 }
 
-
-@media screen and (max-width: 520px) {
-    #nav_container .menu {
-        display: flex;
-        margin: 1rem;
-        margin-left: 2.5rem ;
-        margin-right: 2.5rem ;
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-
-    #nav_container ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: 0.25rem;
-    }
-
-    #nav_container ul li{
-        width: 100%;
-        text-align: center;
-    }
-
-    #nav_container ul li a {
-        margin: 0.2rem 0.5rem;
-    }
-
-    #nav_container ul.open{
-        display: flex;
-        flex-direction: column;
-    }
+#root{
+    
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
 }

@@ -7,24 +7,24 @@ import REGISTER from './components/Register'
 import PROFIL from './components/Profil'
 import NAVBAR from './components/NavBar'
 import FOOTER from './components/Footer'
-import PRODUCT from './components/Product'
+import WISHLIST from './components/WishList'
 
 
 function App() {
   return(
-  <div className='App'>
-    <Router>
-      <NAVBAR />
-      <Routes>
-        <Route path='/' element={<HOME />} />
-        <Route path='/login' element={<LOGIN />} />
-        <Route path='/register' element={<REGISTER />} />
-        <Route path='/profil' element={<PROFIL />} />
-        <Route path='/product' element={<PRODUCT />} />
-      </Routes>
-      <FOOTER />
-    </Router>
-  </div>
+    <div className='min-h-screen flex flex-col'>
+      <Router>
+        <NAVBAR />
+        <Routes>
+          <Route path='/' element={<HOME />} />
+          <Route path='/login' element={<LOGIN />} />
+          <Route path='/register' element={<REGISTER />} />
+          <Route path='/profil' element={<PROFIL />} />
+          <Route path='/favoris' element={<WISHLIST />} />
+        </Routes>
+        <FOOTER />
+      </Router>
+    </div>
   )
 }
 
